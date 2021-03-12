@@ -1,0 +1,139 @@
+<section
+	class="content"
+	ng-controller="pharmaController"
+	ng-init="getDrugItems($event);"
+>
+	<div class="container-fluid">
+		<!-- Main row -->
+		<div class="row">
+			<section class="col-lg-12 connectedSortable">
+
+				<div class="card">
+					<div class="card-header">
+						<h3 class="card-title">
+							<i class="fas fa-user-nurse mr-1"></i>
+							สร้างรายการยา
+						</h3>
+					</div><!-- /.card-header -->
+					<div class="card-body">
+
+						<div class="form-group col-md-8">
+							<label class="col-sm-2 control-label">ชื่อ : </label>
+							<div class="col-sm-10">
+								<input
+									type="text"
+									id="name" 
+									name="name"
+									ng-model="userDrugList.name"
+									class="form-control"
+								/>
+							</div>
+						</div>
+
+						<div class="form-group col-md-8">
+							<label class="col-sm-2 control-label">ประเภท : </label>
+							<div class="col-sm-10">
+								<select 
+									id="list_type" 
+									name="list_type"
+									ng-model="userDrugList.type"
+									class="form-control select2"
+								>
+									<option value="" selected="selected">-- กรุณาเลือก --</option>
+									<option value="OPD">OPD</option>
+									<option value="IPD">IPD</option>
+								</select>
+							</div>
+						</div>
+
+					</div><!-- /.card-body -->
+				</div><!-- /.card -->
+
+				<div class="card">
+					<div class="card-body">
+
+						<div class="form-group mx-2">
+							<label style="margin-right: 5px;">เลือกยา : </label>
+							<select 
+								id="cboDrugItems" 
+								name="cboDrugItems"
+								ng-model="cboDrugItems"
+								class="form-control select2"
+								style="width: 800px; margin-right: 5px;"
+							>
+								<option value="" selected="selected">-- กรุณาเลือก --</option>
+								<option ng-repeat="(index, drug) in drugItems" value="{{ drug.icode }}">
+									{{ drug.icode+ '-' +drug.name+ ' ' +drug.strength+ ' ' +drug.units }}
+								</option>
+							</select>
+
+							<button ng-click="addDrugToDrugList($event)" class="btn btn-primary">
+								<i class="fas fa-plus-circle"></i> เพิ่ม
+							</button>
+						</div>
+
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th style="text-align: center; width: 6%;">ลำดับ</th>
+                                        <th style="text-align: center; width: 6%;">icode</th>
+										<th style="text-align: center;">ชื่อยา</th>
+										<th style="text-align: center; width: 15%;">ขนาด</th>
+                                        <th style="text-align: center; width: 15%;">หน่วย</th>
+                                        <th style="text-align: center; width: 10%;">ราคา</th>
+                                        <th style="text-align: center; width: 6%;">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="(index, row) in drugLists">
+                                        <td style="text-align: center;">{{ index+1 }}</td>
+                                        <td style="text-align: center;">{{ row.icode }}</td>
+										<td>{{ row.name }}</td>
+                                        <td style="text-align: center;">{{ row.strength }}</td>
+                                        <td style="text-align: center;">{{ row.units }}</td>
+                                        <td style="text-align: center;">{{ row.unitprice | currency:'':0 }}</td>
+										<td style="text-align: center;">
+											<a 
+												href="#"
+												ng-click="removeItemFromDrugList(row.icode)"
+												class="btn btn-danger"
+											>
+												<i class="far fa-trash-alt"></i>
+											</a>
+										</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+						</div><!-- /.table-responsive -->
+
+					</div><!-- /.card-body -->
+					<div class="card-footer">
+						<button ng-click="storeDrugList($event)" class="btn btn-success float-right">บันทึก</button>
+					</div>
+				</div><!-- /.card -->
+
+			</section>
+		</div><!-- Main row -->
+	</div><!-- /.container-fluid-->
+</section><!-- /.content -->
+
+<script type="text/javascript">
+	$(function() {
+		$('.select2').select2();
+
+		$('#sdate').datepicker({
+			autoclose: true,
+			language: 'th',
+			format: 'dd/mm/yyyy',
+			thaiyear: true
+		}).datepicker('update', new Date());
+
+		$('#edate').datepicker({
+			autoclose: true,
+			language: 'th',
+			format: 'dd/mm/yyyy',
+			thaiyear: true,
+		}).datepicker('update', new Date());
+	});
+</script>

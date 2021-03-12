@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="App">
+    <head>
+        <base href="/public_html/ng-payarear/" />
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>DNH Payarear System</title>
+
+        <!-- Google Font: Source Sans Pro -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+        <!-- Ionicons -->
+        <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+        
+        <!-- build:css modules/css/release.css -->
+        <link rel="stylesheet" href="node_modules/select2/dist/css/select2.min.css">
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="node_modules/admin-lte/plugins/fontawesome-free/css/all.min.css">
+        <!-- Tempusdominus Bootstrap 4 -->
+        <link rel="stylesheet" href="node_modules/admin-lte/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+        <!-- iCheck -->
+        <link rel="stylesheet" href="node_modules/admin-lte/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+        <!-- JQVMap -->
+        <link rel="stylesheet" href="node_modules/admin-lte/plugins/jqvmap/jqvmap.min.css">
+        <!-- Theme style -->
+        <link rel="stylesheet" href="node_modules/admin-lte/dist/css/adminlte.min.css">
+        <!-- overlayScrollbars -->
+        <link rel="stylesheet" href="node_modules/admin-lte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+        <!-- Daterange picker -->
+        <link rel="stylesheet" href="node_modules/admin-lte/plugins/daterangepicker/daterangepicker.css">
+        <!-- summernote -->
+        <link rel="stylesheet" href="node_modules/admin-lte/plugins/summernote/summernote-bs4.min.css">
+
+        <link rel="stylesheet" href="node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+        <link rel="stylesheet" href="node_modules/angularjs-toaster/toaster.css">
+        <link rel='stylesheet' href='node_modules/angular-loading-bar/build/loading-bar.min.css' type='text/css' media='all' />
+        <link rel='stylesheet' href='node_modules/jquery-timepicker/jquery.timepicker.css' type='text/css' media='all' />
+        <link rel="stylesheet" href="assets/css/main.css">
+        <!-- endbuild -->
+        <link rel="icon" type="image/png" href="assets/img/favicon.png">
+    </head>
+    <body class="hold-transition sidebar-mini" ng-controller="mainController"> 
+        <div class="wrapper">
+            
+            <div ng-include="'./templates/layouts/navbar.html'"></div>
+            
+            <!-- Main Sidebar Container -->
+            <div ng-include="'./templates/layouts/sidebar.html'"></div>
+
+            <main class="content-wrapper">
+                <!-- Content Header (Page header) -->
+                <div ng-include="'./templates/layouts/content-header.html'"></div>
+                
+                <div ng-view></div>
+
+                <toaster-container></toaster-container>
+            </main>
+
+            <div ng-include="'./templates/modals/login-form.html'"></div>
+
+            <div ng-include="'./templates/layouts/footer.html'"></div>
+            
+        </div><!-- ./wrapper -->
+        
+        <script src="app/env.js"></script>
+        
+        <!-- build:js modules/js/release.js -->
+        <!-- jQuery -->
+        <script src="node_modules/admin-lte/plugins/jquery/jquery.min.js"></script>
+        <!-- jQuery UI 1.11.4 -->
+        <script src="node_modules/admin-lte/plugins/jquery-ui/jquery-ui.min.js"></script>
+        <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+        <script>
+            $.widget.bridge('uibutton', $.ui.button)
+        </script>
+        <!-- Bootstrap 4 -->
+        <script src="node_modules/admin-lte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- ChartJS -->
+        <script src="node_modules/admin-lte/plugins/chart.js/Chart.min.js"></script>
+        <!-- Sparkline -->
+        <script src="node_modules/admin-lte/plugins/sparklines/sparkline.js"></script>
+        <!-- JQVMap -->
+        <script src="node_modules/admin-lte/plugins/jqvmap/jquery.vmap.min.js"></script>
+        <script src="node_modules/admin-lte/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+        <!-- jQuery Knob Chart -->
+        <script src="node_modules/admin-lte/plugins/jquery-knob/jquery.knob.min.js"></script>
+        <!-- daterangepicker -->
+        <script src="node_modules/admin-lte/plugins/moment/moment.min.js"></script>
+        <script src="node_modules/admin-lte/plugins/daterangepicker/daterangepicker.js"></script>
+        <!-- Tempusdominus Bootstrap 4 -->
+        <script src="node_modules/admin-lte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+        <!-- Summernote -->
+        <script src="node_modules/admin-lte/plugins/summernote/summernote-bs4.min.js"></script>
+        <!-- overlayScrollbars -->
+        <script src="node_modules/admin-lte/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+        <!-- AdminLTE App -->
+        <script src="node_modules/admin-lte/dist/js/adminlte.js"></script>
+
+        <script src="node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+        <script src="assets/js/bootstrap-datepicker-custom.js"></script>
+        <script src="node_modules/bootstrap-datepicker/dist/locales/bootstrap-datepicker.th.min.js"></script>        
+        <script src="node_modules/angular/angular.min.js"></script>
+        <script src="node_modules/angular-route/angular-route.min.js"></script>
+        <script src="node_modules/angular-animate/angular-animate.min.js"></script>
+        <script src="node_modules/angularjs-toaster/toaster.min.js"></script>
+        <script src="node_modules/ngstorage/ngstorage.min.js"></script>
+        <script src="node_modules/select2/dist/js/select2.full.min.js"></script>
+        <script src='node_modules/angular-loading-bar/build/loading-bar.min.js'></script>
+        <script src='node_modules/jquery-timepicker/jquery.timepicker.js'></script>
+        
+        <script src="app/app.js"></script>
+        <script src="app/routes.js"></script>
+        <script src="app/controllers/mainCtrl.js"></script>
+        <script src="app/controllers/homeCtrl.js"></script>
+        <script src="app/controllers/dashdayCtrl.js"></script>
+        <script src="app/controllers/dashmonthCtrl.js"></script>
+        <script src="app/controllers/userCtrl.js"></script>
+        <script src="app/controllers/arrearCtrl.js"></script>
+        <script src="app/controllers/pharmaCtrl.js"></script>
+        <script src="app/services/auth.js"></script>
+        <script src="app/services/datetime.js"></script>
+        <script src="app/services/chart.js"></script>
+        <script src="app/services/stringFormat.js"></script>
+        <script src="app/directives/cardData.js"></script>
+        <script src="app/filters/thdate.js"></script>
+        <script src="app/filters/dbdate.js"></script>
+        <!-- endbuild -->
+
+        <script src="https://code.highcharts.com/highcharts.js"></script>
+        <script src="http://code.highcharts.com/highcharts-more.js"></script>
+
+    </body>
+</html>

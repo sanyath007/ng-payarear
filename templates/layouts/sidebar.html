@@ -1,0 +1,104 @@
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="home" class="brand-link">
+        <img src="assets/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+        <span class="brand-text font-weight-light">DNH PayArear v.1</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        
+        <!-- Sidebar user panel (optional) -->
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex" ng-show="isLogedIn">
+            <div class="image">
+                <img src="assets/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+            </div>
+            <div class="info">
+                <a href="#" class="d-block">Sanya Thammawong</a>
+            </div>
+        </div>
+
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <!-- Add icons to the links using the .nav-icon class
+                    with font-awesome or any other icon font library -->
+                <li class="nav-item menu-open" id="dash">
+                    <a href="#" class="nav-link active" ng-click="sidebarMenuToggle($event)">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            Dashboard
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <!-- <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="้home" class="nav-link active" ng-click="sidebarSubMenuToggle($event)">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>รายปี</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="dash-month" class="nav-link" ng-click="sidebarSubMenuToggle($event)">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>รายเดือน</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="dash-day" class="nav-link" ng-click="sidebarSubMenuToggle($event)">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>รายวัน</p>
+                            </a>
+                        </li>
+                    </ul> -->
+                </li>
+                <li class="nav-item" id="refer">
+                    <a href="#" class="nav-link" ng-click="sidebarMenuToggle($event)">
+                        <i class="nav-icon fas fa-hospital-user"></i>
+                        <p>
+                            รายการค้างชำระ
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="arrears/op-list" class="nav-link" ng-click="sidebarSubMenuToggle($event)">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>ผู้ป่วยนอก (OPD)</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="arrears/ip-list" class="nav-link" ng-click="sidebarSubMenuToggle($event)">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>ผู้ป่วยใน (IPD)</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- <li class="nav-item">
+                    <a href="#" class="nav-link" ng-click="sidebarMenuToggle($event)">
+                        <i class="nav-icon fas fa-capsules"></i>
+                        <p>
+                            ห้องจ่ายยา
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="pharma/op" class="nav-link" ng-click="sidebarSubMenuToggle($event)">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>ยอดการใช้ยา OPD</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="pharma/ip" class="nav-link" ng-click="sidebarSubMenuToggle($event)">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>ยอดการใช้ยา IPD</p>
+                            </a>
+                        </li>
+                    </ul> -->
+                </li>
+            </ul>
+        </nav><!-- /.sidebar-menu -->
+    </div><!-- /.sidebar -->
+</aside>

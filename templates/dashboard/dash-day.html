@@ -1,0 +1,182 @@
+<section
+	class="content"
+	ng-controller="dashdayController"
+	ng-init="getOpVisitDay($event);
+			getOpVisitTypeDay($event);
+			getIpVisitDay($event);
+			getIpClassDay($event);
+			getReferInDay($event);
+			getReferOutDay($event);
+			getErrorOp($event);
+			getErrorIp($event);"
+>
+	<div class="container-fluid">		
+		<div class="row">
+			<div class="col-md-12" style="margin: 20px 0;">
+
+				<form action="" method="POST" class="form-inline">
+					<div class="form-group">
+						<label>วันที่ :</label>
+						<input
+							type="text"
+							id="cboDate"
+							name="cboDate"
+							ng-model="cboDate"
+							class="form-control"
+							style="margin: 0 10px;"
+							autocomplete="off"
+						>
+					</div>
+
+					<button class="btn btn-primary" ng-click="getOpVisitDay($event);
+															getOpVisitTypeDay($event);
+															getIpVisitDay($event);
+															getIpClassDay($event);
+															getReferInDay($event);
+															getReferOutDay($event);
+															getErrorOp($event);
+															getErrorIp($event);"
+					>
+						ตกลง
+					</button>
+				</form>
+
+			</div><!-- /.col -->
+		</div><!-- /.row -->
+
+		<!-- Main row -->
+		<div class="row">
+			<section class="col-lg-12 connectedSortable">
+				<div class="card">
+					<div class="card-header">
+						<h3 class="card-title">
+							<i class="fas fa-users mr-1"></i>
+							ยอดผู้ป่วยนอก ประจำวันที่ {{ cboDate }}
+						</h3>
+					</div><!-- /.card-header -->
+					<div class="card-body">
+						<div class="row">
+							<div class="col-md-6">
+
+								<div id="opVisitBarContainer" style="width: 100%; height: 400px; margin: 20px auto;"></div>
+
+							</div>
+
+							<div class="col-md-6">
+
+								<div id="opVisitTypePieContainer" style="width: 100%; height: 400px; margin: 20px auto;"></div>
+
+							</div>
+						</div>
+
+					</div><!-- /.card-body-->
+				</div><!-- /.card-->
+
+				<div class="card">
+					<div class="card-header">
+						<h3 class="card-title">
+							<i class="fas fa-bed mr-1"></i>
+							ยอดผู้ป่วยใน ประจำวันที่ {{ cboDate }}
+						</h3>
+					</div><!-- /.card-header -->
+					<div class="card-body">
+						<div class="row">
+							<div class="col-md-6">
+
+								<div id="ipClassPieContainer" style="width: 100%; height: 400px; margin: 20px auto;"></div>
+
+							</div>
+							
+							<div class="col-md-6">
+
+								<div id="ipVisitBarContainer" style="width: 100%; height: 400px; margin: 20px auto;"></div>
+
+							</div>
+						</div>
+
+					</div><!-- /.card-body-->
+				</div><!-- /.card-->
+
+				<div class="card">
+					<div class="card-header">
+						<h3 class="card-title">
+							<i class="fas fa-ambulance mr-1"></i>
+							Refer In/Out ประจำวันที่ {{ cboDate }}
+						</h3>
+					</div><!-- /.card-header -->
+					<div class="card-body">
+						<div class="row">
+							<div class="col-md-6">
+
+								<div id="referInBarContainer" style="width: 100%; height: 400px; margin: 20px auto;"></div>
+
+							</div>
+
+							<div class="col-md-6">
+
+								<div id="referOutBarContainer" style="width: 100%; height: 400px; margin: 20px auto;"></div>
+
+							</div>
+						</div>
+					</div><!-- /.card-body-->
+				</div><!-- /.card-->
+
+				<div class="card">
+					<div class="card-header">
+						<h3 class="card-title">
+							<i class="fas fa-user-nurse mr-1"></i>
+							ข้อมูล Error ประจำวันที่ {{ cboDate }}
+							<!-- <a href="#" class="btn btn-warning btn-xs">ดูเพิ่มเติม</a> -->
+						</h3>
+					</div><!-- /.card-header -->
+					<div class="card-body">
+						
+						<div class="row">
+							<div class="col-md-12">
+								<a
+									href="http://192.168.20.4:3839/errorreport/popup_hosxp_error4.php?mode=detail&datatype=opd&sdate={{ cboDate }}&edate={{ cboDate }}&point=SERVICE"
+									target="_blank"
+									class="btn btn-danger"
+								>
+									<i class="fas fa-arrow-alt-circle-right"></i>
+									ดูรายละเอียด
+								</a>
+								
+								<div id="errorOPBarContainer" style="width: 100%; height: 400px; margin: 10px auto;"></div>
+								
+							</div>
+							
+							<div class="col-md-12">
+								<a
+									href="http://192.168.20.4:3839/errorreport/popup_hosxp_error4.php?mode=detail&datatype=ipd&sdate={{ sDate }}&edate={{ eDate }}&point=CHART"
+									target="_blank"
+									class="btn btn-danger"
+								>
+									<i class="fas fa-arrow-alt-circle-right"></i>
+									ดูรายละเอียด
+								</a>
+								
+								<div id="errorIPBarContainer" style="width: 100%; height: 400px; margin: 10px auto;"></div>
+
+							</div>
+						</div>
+
+					</div><!-- /.card-body-->
+				</div><!-- /.card-->
+
+			</section><!-- /.col-lg-12 -->
+		</div><!-- Main row -->
+	
+	</div><!-- container-fluid -->
+</div><!-- content -->
+
+<script type="text/javascript">
+	$(function() {
+		$('#cboDate').datepicker({
+			autoclose: true,
+			language: 'th',
+			format: 'dd/mm/yyyy',
+			thaiyear: true
+		}).datepicker('update', new Date());
+	});
+</script>

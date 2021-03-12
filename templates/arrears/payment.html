@@ -1,0 +1,267 @@
+<section
+	class="content"
+	ng-controller="arrearController"
+	ng-init="getPayment($event);"
+>
+	<div class="container-fluid">
+		<!-- Main row -->
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card">
+					<div class="card-header">
+						<h3 class="card-title">
+							<i class="fas fa-cash-register"></i>
+							บันทึกค้างชำระ - {{ (isOpCase) ? 'ผู้ป่วยนอก (OPD)' : 'ผู้ป่วยใน (IPD)' }}
+						</h3>
+					</div><!-- /.card-header -->
+					<div class="card-body">
+						<div style="display: flex; flex-direction: row; align-items:center;">						
+							<div class="text-center col-2">
+								<img
+									class="profile-user-img img-fluid img-circle"
+									src="assets/img/user4-128x128.jpg"
+									alt="User profile picture"
+								>
+							</div>
+
+							<div class="col-10" style="padding: 10px 20px 0;">						
+								<table class="table table-striped" style="margin-top: 10px;">
+									<tbody>
+										<tr>
+											<td style="width: 13%;" ng-if="!isOpCase">AN</td>
+											<td ng-if="!isOpCase">{{ payment.visit.an }}</td>
+											<td style="width: 13%;" ng-if="isOpCase">VN</td>
+											<td ng-if="isOpCase">{{ payment.visit.vn }}</td>
+											<td style="width: 13%;">HN</td>
+											<td>{{ payment.visit.hn }}</td>
+										</tr>
+										<tr>
+											<td>ชื่อ-สกุล</td>
+											<td>{{ payment.visit.patname }}</td>
+											<td>CID</td>
+											<td>{{ payment.visit.cid }}</td>
+										</tr>
+										<tr>
+											<td>สิทธิ์</td>
+											<td>{{ payment.visit.pttname }}</td>
+											<td><span ng-if="!isOpCase">วอร์ด</span></td>
+											<td>{{ payment.visit.ward }}</td>
+										</tr>
+										<tr ng-if="!isOpCase">
+											<td>วันที่ Admit</td>
+											<td>{{ payment.visit.regdate | thdate }}</td>
+											<td>วันที่ D/C</td>
+											<td>{{ payment.visit.dchdate | thdate }}</td>
+										</tr>
+										<tr ng-if="isOpCase">
+											<td>วันที่มารับบริการ</td>
+											<td>{{ payment.visit.vstdate | thdate }}</td>
+											<td>เวลามารับบริการ</td>
+											<td>{{ payment.visit.vsttime }}</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+
+						<div class="card-footer card-comments" ng-if="payment.notes.length > 0">
+							<div
+								class="card-comment"
+								ng-repeat="(index, note) in payment.notes"
+							>
+								<!-- User image -->
+								<img class="img-circle img-sm" src="assets/img/user1-128x128.jpg" alt="User Image">
+
+								<div class="comment-text">
+									<span class="username">
+										{{ note.note_staff }} ({{ note.staff_name }})
+										<span class="text-muted float-right">{{ note.note_datetime }}</span>
+									</span><!-- /.username -->
+									{{ note.plain_text }}
+								</div><!-- /.comment-text -->
+							</div><!-- /.card-comment -->
+						</div>
+
+					</div><!-- /.card-body -->
+				</div><!-- /.card -->
+				<!-- Profile Image -->
+
+				<div class="card">
+					<div class="card-header p-2">
+						<ul class="nav nav-pills">
+							<li class="nav-item">
+								<a class="nav-link active" href="#payment" data-toggle="tab">ชำระเงิน</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#activities" data-toggle="tab">รายละเอียดการชำระ</a>
+							</li>
+						</ul>
+					</div><!-- /.card-header -->
+					<div class="card-body">
+						<div class="tab-content">
+							<div class="active tab-pane" id="payment">
+								<!-- Post -->
+								<div class="post" style="padding: 10px 50px 0;">
+									<table class="table table-bordered">
+										<thead>
+											<tr style="background-color: #dadada;">
+												<th>ยอดค่าใช้จ่ายทั้งหมด</th>
+												<td style="text-align: right;">
+													<h5 style="margin: 0;">
+														{{ payment.visit.income | currency:'':2 }}
+													</h5>
+												</td>
+											</tr>
+											<tr>
+												<th>ลูกหนี้</th>
+												<td style="text-align: right; color: green;">
+													{{ payment.visit.uc_money | currency:'':2 }}
+												</td>
+											</tr>
+											<tr>
+												<th>ชำระเงิน</th>
+												<td style="text-align: right;">
+													{{ payment.visit.paid_money | currency:'':2 }}
+												</td>
+											</tr>
+											<tr>
+												<th>ชำระเงินแล้ว</th>
+												<td style="text-align: right;">
+													{{ payment.visit.rcpt_money | currency:'':2 }}
+												</td>
+											</tr>
+											<tr>
+												<th>คงเหลือ</th>
+												<td style="text-align: right; color: red;">
+													<h5 style="margin: 0;">
+														{{ payment.visit.remain | currency:'':2 }}
+													</h5>
+												</td>
+											</tr>
+										</thead>
+									</table>
+
+									<form class="form-horizontal">
+										<div class="row">
+											<div class="form-group col-md-6">
+												<input
+													type="text"
+													id="txtBillNo"
+													name="txtBillNo"
+													class="form-control"
+													placeholder="เลขที่ใบเสร็จ"
+													ng-disabled="payment.visit.remain === 0"
+												>
+											</div>
+
+											<div class="form-group col-md-4">
+												<input
+													type="text"
+													id="txtPaidDate"
+													name="txtPaidDate"
+													class="form-control"
+													autocomplete="off"
+													ng-disabled="payment.visit.remain === 0"
+												>
+											</div>
+
+											<div class="form-group col-md-2">
+												<input
+													type="text"
+													id="txtPaidTime"
+													name="txtPaidTime"
+													class="form-control"
+													autocomplete="off"
+													ng-disabled="payment.visit.remain === 0"
+												>
+											</div>
+										</div>
+										
+										<div class="input-group input-group-md mb-0 pr-3">
+											<input
+												type="text"
+												id="txtPaidAmount"
+												name="txtPaidAmount"
+												class="form-control form-control-md"
+												placeholder="ยอดชำระ"
+												ng-disabled="payment.visit.remain === 0"
+											>
+											<div class="input-group-append">
+												<button
+													type="submit"
+													class="btn btn-danger"
+													ng-click="storeArrear()"
+													ng-disabled="payment.visit.remain === 0"
+												>
+													ชำระ
+												</button>
+											</div>
+										</div>
+									</form><br>
+								</div><!-- /.post -->
+							</div><!-- /.tab-pane -->
+
+							<div class="tab-pane" id="activities">
+
+								<table class="table table-bordered" style="margin-top: 20px;">
+									<thead>
+										<tr>
+											<th style="width: 10%; text-align: center;">ชำระครั้งที่</th>
+											<th style="width: 15%; text-align: center;">เลขที่ใบเสร็จ</th>
+											<th style="width: 15%; text-align: center;">วันที่</th>
+											<th style="width: 10%; text-align: center;">เวลา</th>
+											<th style="text-align: center;">ผู้รับ</th>
+											<th style="width: 15%; text-align: center;">ยอดชำระ</th>
+											<th style="width: 15%; text-align: center;">ยอดคงเหลือ</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr ng-if="payment.paid" ng-repeat="(index, row) in payment.paid">
+											<td style="text-align: center;">{{ row.paid_no }}</td>
+											<td style="text-align: center;">{{ row.bill_no }}</td>
+											<td style="text-align: center;">{{ row.paid_date | thdate }}</td>
+											<td style="text-align: center;">{{ row.paid_time }}</td>
+											<td>{{ row.cashier }}</td>
+											<td style="text-align: right;">{{ row.paid_amount | currency:'':2  }}</td>
+											<td style="text-align: right;">{{ row.remain | currency:'':2  }}</td>
+										</tr>
+										<tr>
+											<td style="text-align: right;" colspan="5">รวมชำระแล้วทั้งสิ้น</td>
+											<td style="text-align: right;">{{ totalData.totalPaid | currency:'':2 }}</td>
+											<td style="text-align: right;"></td>
+										</tr>
+									</tbody>
+								</table>
+
+							</div><!-- /.tab-pane -->
+						</div><!-- /.tab-content -->
+					</div><!-- /.card-body -->
+				</div><!-- /.nav-tabs-custom -->
+
+			</div><!-- /.col -->
+		</div><!-- Main row -->
+	</div><!-- /.container-fluid-->
+</section><!-- /.content -->
+
+<script type="text/javascript">
+	$(function() {
+		$('#txtPaidDate').datepicker({
+			autoclose: true,
+			language: 'th',
+			format: 'dd/mm/yyyy',
+			thaiyear: true
+		}).datepicker('update', new Date());
+
+		$('#txtPaidTime').timepicker({
+			defaultTime: 'now',
+			timeFormat: 'HH:mm',
+			interval: 5,
+			dynamic: false,
+			dropdown: true,
+			scrollbar: true,
+			minTime: '00:00:00',
+			maxTime: '23:59:59',
+			zindex: 3
+		});
+	});
+</script>

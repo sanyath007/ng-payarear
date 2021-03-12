@@ -1,0 +1,226 @@
+<section
+	class="content"
+	ng-controller="dashmonthController"
+	ng-init="getOpVisit($event);
+			getOpVisitType($event);
+			getIpVisit($event);
+			getIpClass($event);
+			getReferIn($event);
+			getReferOut($event);
+			getOrVisit($event);
+			getOrType($event);
+			getErrorOp($event);
+			getErrorIp($event);"
+>
+	<div class="container-fluid">		
+		<div class="row">
+			<div class="col-md-12" style="margin: 20px 0;">
+
+				<form action="" method="POST" class="form-inline">
+					<div class="form-group">
+						<label>ประจำเดือน :</label>
+						<input
+							type="text"
+							id="cboMonth"
+							name="cboMonth"
+							ng-model="cboMonth"
+							class="form-control"
+							style="margin: 0 10px;"
+							autocomplete="off"
+						>
+					</div>
+
+					<button class="btn btn-primary" ng-click="getOpVisit($event);
+																getOpVisitType($event);
+																getIpVisit($event);
+																getIpClass($event);
+																getReferIn($event);
+																getReferOut($event);
+																getOrVisit($event);
+																getOrType($event);
+																getErrorOp($event);
+																getErrorIp($event);"
+					>
+						ตกลง
+					</button>
+				</form>
+
+			</div><!-- /.col -->
+		</div><!-- /.row -->
+
+		<!-- Main row -->
+		<div class="row">
+			<section class="col-lg-12 connectedSortable">
+				<div class="card">
+					<div class="card-header">
+						<h3 class="card-title">
+							<i class="fas fa-users mr-1"></i>
+							ยอดผู้ป่วยนอก ประจำเดือน {{ cboMonth }}
+						</h3>
+					</div><!-- /.card-header -->
+					<div class="card-body">
+						
+						<div class="row">
+							<div class="col-md-12">
+
+								<div id="opVisitBarContainer" style="width: 100%; height: 400px; margin: 20px auto;"></div>
+
+							</div>
+
+							<div class="col-md-12">
+
+								<div id="opVisitTypePieContainer" style="width: 100%; height: 400px; margin: 20px auto;"></div>
+
+							</div>
+						</div>
+
+					</div><!-- /.card-body-->
+				</div><!-- /.card-->
+
+				<div class="card">
+					<div class="card-header">
+						<h3 class="card-title">
+							<i class="fas fa-bed mr-1"></i>
+							ยอดผู้ป่วยใน ประจำวันที่ {{ cboMonth }}
+						</h3>
+					</div><!-- /.card-header -->
+					<div class="card-body">
+						<div class="row">
+							<div class="col-md-12">
+
+								<div id="ipClassPieContainer" style="width: 100%; height: 400px; margin: 20px auto;"></div>
+
+							</div>
+							
+							<div class="col-md-12">
+
+								<div id="ipVisitBarContainer" style="width: 100%; height: 400px; margin: 20px auto;"></div>
+
+							</div>
+						</div>
+
+					</div><!-- /.card-body-->
+				</div><!-- /.card-->
+
+				<div class="card">
+					<div class="card-header">
+						<h3 class="card-title">
+							<i class="fas fa-ambulance mr-1"></i>
+							Refer In/Out ประจำเดือน {{ cboMonth }}
+						</h3>
+					</div><!-- /.card-header -->
+					<div class="card-body">
+						
+						<div class="row">
+							<div class="col-md-12">
+
+								<div id="referInBarContainer" style="width: 100%; height: 400px; margin: 20px auto;"></div>
+
+							</div>
+
+							<div class="col-md-12">
+
+								<div id="referOutBarContainer" style="width: 100%; height: 400px; margin: 20px auto;"></div>
+
+							</div>
+						</div>
+
+					</div><!-- /.card-body-->
+				</div><!-- /.card-->
+
+				<div class="card">
+					<div class="card-header">
+						<h3 class="card-title">
+							<i class="fas fa-wheelchair mr-1"></i>
+							ห้องอุบัติเหตุและฉุกเฉิน (ER) ปีงบประมาณ {{ cboYear }}
+						</h3>
+					</div><!-- /.card-header -->
+					<div class="card-body">
+						<div class="row">
+							<div class="col-md-6">
+
+								<div id="erVisitBarContainer" style="width: 100%; height: 400px; margin: 20px auto;"></div>
+
+							</div>
+
+							<div class="col-md-6">
+
+								<div id="erEmergencyPieContainer" style="width: 100%; height: 400px; margin: 20px auto;"></div>
+
+							</div>
+						</div>
+
+					</div>
+				</div>
+
+				<div class="card">
+					<div class="card-header">
+						<h3 class="card-title">
+							<i class="fas fa-user-nurse mr-1"></i>
+							ห้องผ่าตัด (OR) ประจำเดือน {{ cboMonth }}
+						</h3>
+					</div><!-- /.card-header -->
+					<div class="card-body">
+						
+						<div class="row">
+							<div class="col-md-12">
+
+								<div id="orTypePieContainer" style="width: 100%; height: 400px; margin: 20px auto;"></div>
+
+							</div>
+
+							<div class="col-md-12">
+
+								<div id="orVisitBarContainer" style="width: 100%; height: 400px; margin: 20px auto;"></div>
+
+							</div>
+						</div>
+
+					</div><!-- /.card-body-->
+				</div><!-- /.card-->
+
+				<div class="card">
+					<div class="card-header">
+						<h3 class="card-title">
+							<i class="fas fa-user-nurse mr-1"></i>
+							ข้อมูล Error ประจำเดือน {{ cboMonth }}
+							<!-- <a href="#" class="btn btn-warning btn-xs">ดูเพิ่มเติม</a> -->
+						</h3>
+					</div><!-- /.card-header -->
+					<div class="card-body">
+						
+						<div class="row">
+							<div class="col-md-12">
+
+								<div id="errorOPBarContainer" style="width: 100%; height: 400px; margin: 20px auto;"></div>
+
+							</div>
+
+							<div class="col-md-12">
+
+								<div id="errorIPBarContainer" style="width: 100%; height: 400px; margin: 20px auto;"></div>
+
+							</div>
+						</div>
+
+					</div><!-- /.card-body-->
+				</div><!-- /.card-->
+
+			</section><!-- /.col-lg-12 -->
+		</div><!-- Main row -->
+	
+	</div><!-- container-fluid -->
+</div><!-- content -->
+
+<script type="text/javascript">
+	$(function() {
+		$('#cboMonth').datepicker({
+			autoclose: true,
+			format: 'mm/yyyy',
+			viewMode: "months", 
+			minViewMode: "months",
+			language: 'th',
+			thaiyear: true
+		}).datepicker('update', new Date());
+	});
+</script>
