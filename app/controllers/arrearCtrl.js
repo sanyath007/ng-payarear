@@ -121,6 +121,7 @@ app.controller('arrearController', [
 			let paidDate = $('#txtPaidDate').val();
 			let paidTime = $('#txtPaidTime').val();
 			let billNo = $('#txtBillNo').val();
+			let remark = $('#txtRemark').val();
 
 			let newArrear = {
 				vn: $scope.isOpCase ? $scope.payment.visit.vn : '',
@@ -132,7 +133,8 @@ app.controller('arrearController', [
 				paid_time: `${paidTime}:00`,
 				paid_amount: paidAmount,
 				remain: parseFloat($scope.payment.visit.remain) - parseFloat(paidAmount),
-				cashier: 'test' // TODO: get logged in user
+				cashier: 'test', // TODO: get logged in user
+				remark: remark
 			};
 
 			$http.post(`${CONFIG.apiUrl}/arrears-payment/${$scope.payment.visit.vn}/${$scope.payment.visit.hn}`, newArrear)
