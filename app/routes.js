@@ -11,6 +11,9 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
 		templateUrl: 'templates/home.html',
 		controller: 'homeController'
 	})
+	.when('/login', {
+		controller: 'mainController'
+	})
 	.when('/users', {
 		templateUrl: 'templates/user/list.html',
 		controller: 'userController'

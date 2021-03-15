@@ -78,6 +78,7 @@ var app = angular.module('App', ['ngRoute', 'ngStorage', 'toaster', 'angular-loa
         '$window',
         '$http',
         'CONFIG',
+        '$location',
         '$localStorage',
         function ($rootScope, $window, $http, CONFIG, $location, $localStorage) 
         {
@@ -86,6 +87,9 @@ var app = angular.module('App', ['ngRoute', 'ngStorage', 'toaster', 'angular-loa
                 $rootScope.isLogedIn = true;
                 // add jwt token to auth header for all requests made by the $http service
                 $http.defaults.headers.common.Authorization = `Bearer ${$localStorage.currentUser.token}`;
+            } else {
+                console.log('Unauthenticate!!');
+                $location.path('/login');
             }
 
             $rootScope.showLogin = function() {
