@@ -100,16 +100,42 @@
 
 					</div><!-- /.card-body -->
 					<div class="card-footer clearfix">
-						<div class="m-0 float-left" ng-show="data">
-							<a href="#" class="btn btn-success">Excel</a>
-						</div>
-						<ul class="pagination pagination-sm m-0 float-right" ng-show="false">
-							<li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
-							<li class="page-item"><a class="page-link" href="#">1</a></li>
-							<li class="page-item"><a class="page-link" href="#">2</a></li>
-							<li class="page-item"><a class="page-link" href="#">3</a></li>
-							<li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
-						</ul>
+
+						<div class="row">
+							<!-- <div class="col-3 m-0 float-left" ng-show="data">
+								<a href="#" class="btn btn-success">Excel</a>
+							</div> -->
+							
+							<div class="col-6 m-0" ng-show="pager" style="text-align: center;">
+								<span>จำนวนทั้งหมด {{ pager.total }} ราย</span>
+							</div>
+							
+							<div class="col-3 m-0" ng-show="data">
+								<ul class="pagination pagination-md m-0 float-right" ng-show="pager">
+									<li class="page-item" ng-class="{disabled: pager.current_page==1}">
+										<a class="page-link" href="#" ng-click="onPaginateLinkClick($event, pager.first_page_url)">
+											First
+										</a>
+									</li>
+									<li class="page-item" ng-class="{disabled: pager.current_page==1}">
+										<a class="page-link" href="#" ng-click="onPaginateLinkClick($event, pager.prev_page_url)">
+											Prev
+										</a>
+									</li>
+									<li class="page-item" ng-class="{disabled: pager.current_page==pager.last_page}">
+										<a class="page-link" href="#" ng-click="onPaginateLinkClick($event, pager.next_page_url)">
+											Next
+										</a>
+									</li>
+									<li class="page-item" ng-class="{disabled: pager.current_page==pager.last_page}">
+										<a class="page-link" href="#" ng-click="onPaginateLinkClick($event, pager.last_page_url)">
+											Last
+										</a>
+									</li>
+								</ul>
+							</div>
+						</div><!-- /.row -->
+
 					</div><!-- /.card-footer -->
 				</div><!-- /.card -->
 	

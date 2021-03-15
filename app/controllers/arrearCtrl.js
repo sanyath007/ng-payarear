@@ -30,38 +30,15 @@ app.controller('arrearController', [
 			}
 		};
 
-		$scope.getIpArrears = function(e) {
-			if(e) e.preventDefault();
-
-			$scope.totalData = initTotalArrear();
-			
-			let startDate = ($('#sdate').val() !== '') 
-							? StringFormatService.convToDbDate($scope.sdate) 
-							: moment().startOf('month').format('YYYY-MM-DD');
-			let endDate = ($('#edate').val() !== '') 
-							? StringFormatService.convToDbDate($scope.edate) 
-							: moment().format('YYYY-MM-DD');
-
-			$http.get(`${CONFIG.apiUrl}/arrears-ip/${startDate}/${endDate}`)
-			.then(res => {
-				$scope.data = res.data.ips;
-
-				// Summary total arrear of ip
-				$scope.totalData.totalArrear = calcArrearTotal($scope.data);
-			}, err => {
-				console.log(err)
-			});
-		};
-		
 		$scope.getOpArrears = function(e) {
 			if(e) e.preventDefault();
 
 			$scope.totalData = initTotalArrear();
 
-			let startDate = ($('#sdate').val() !== '') 
+			let startDate = ($scope.sdate !== '') 
 							? StringFormatService.convToDbDate($scope.sdate) 
 							: moment().format('YYYY-MM-DD');
-			let endDate = ($('#edate').val() !== '') 
+			let endDate = ($scope.edate !== '') 
 							? StringFormatService.convToDbDate($scope.edate) 
 							: moment().format('YYYY-MM-DD');
 
@@ -70,6 +47,29 @@ app.controller('arrearController', [
 				$scope.data = res.data.ops;
 
 				// Summary total arrear of op
+				$scope.totalData.totalArrear = calcArrearTotal($scope.data);
+			}, err => {
+				console.log(err)
+			});
+		};
+
+		$scope.getIpArrears = function(e) {
+			if(e) e.preventDefault();
+
+			$scope.totalData = initTotalArrear();
+			
+			let startDate = ($scope.sdate !== '') 
+							? StringFormatService.convToDbDate($scope.sdate) 
+							: moment().startOf('month').format('YYYY-MM-DD');
+			let endDate = ($scope.edate !== '')
+							? StringFormatService.convToDbDate($scope.edate) 
+							: moment().format('YYYY-MM-DD');
+
+			$http.get(`${CONFIG.apiUrl}/arrears-ip/${startDate}/${endDate}`)
+			.then(res => {
+				$scope.data = res.data.ips;
+
+				// Summary total arrear of ip
 				$scope.totalData.totalArrear = calcArrearTotal($scope.data);
 			}, err => {
 				console.log(err)

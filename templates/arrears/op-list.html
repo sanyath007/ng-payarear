@@ -95,13 +95,15 @@
 						</table>
 
 					</div><!-- /.card-body -->
+
 					<div class="card-footer clearfix">
+
 						<div class="row">
-							<div class="col-3 m-0 float-left" ng-show="data">
+							<!-- <div class="col-3 m-0 float-left" ng-show="data">
 								<a href="#" class="btn btn-success">Excel</a>
-							</div>
+							</div> -->
 							
-							<div class="col-6 m-0" ng-show="data" style="text-align: center;">
+							<div class="col-6 m-0" ng-show="pager" style="text-align: center;">
 								<span>จำนวนทั้งหมด {{ pager.total }} ราย</span>
 							</div>
 							
@@ -129,7 +131,8 @@
 									</li>
 								</ul>
 							</div>
-						</div>
+						</div><!-- /.row -->
+
 					</div><!-- /.card-footer -->
 				</div><!-- /.card -->
 	
