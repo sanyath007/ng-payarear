@@ -121,7 +121,7 @@ app.controller('arrearController', [
 		$scope.storeArrear = (e) => {
 			let paidAmount = $('#txtPaidAmount').val() === '' ? 0 : $('#txtPaidAmount').val();
 			let paidDate = $('#txtPaidDate').val();
-			let paidTime = $('#txtPaidTime').val();
+			// let paidTime = $('#txtPaidTime').val();
 			let billNo = $('#txtBillNo').val();
 			let remark = $('#txtRemark').val();
 
@@ -134,7 +134,7 @@ app.controller('arrearController', [
 				paid_no: $scope.payment.paid.length + 1,
 				bill_no: billNo,
 				paid_date: StringFormatService.convToDbDate(paidDate),
-				paid_time: `${paidTime}:00`,
+				// paid_time: `${paidTime}:00`,
 				paid_amount: paidAmount,
 				remain: parseFloat($scope.payment.visit.remain) - parseFloat(paidAmount),
 				cashier: $rootScope.loggedInUser,
@@ -152,7 +152,7 @@ app.controller('arrearController', [
 				if (res.data.status === 1) {
 					toaster.pop('success', "", 'บันทึกข้อมูลสำเร็จ !!!');
 
-					// TODO: update paid list with new paid
+					// refresh page to update data
 					window.location.reload();
 				} else {10
 					$scope.errors = res.data.errors;
