@@ -219,13 +219,14 @@
 								<table class="table table-bordered" style="margin-top: 20px;">
 									<thead>
 										<tr>
-											<th style="width: 10%; text-align: center;">ชำระครั้งที่</th>
+											<th style="width: 8%; text-align: center;">ชำระครั้งที่</th>
 											<th style="width: 15%; text-align: center;">เลขที่ใบเสร็จ</th>
-											<th style="width: 15%; text-align: center;">วันที่</th>
-											<th style="width: 10%; text-align: center;">เวลา</th>
-											<th style="text-align: center;">ผู้รับ</th>
-											<th style="width: 15%; text-align: center;">ยอดชำระ</th>
-											<th style="width: 15%; text-align: center;">ยอดคงเหลือ</th>
+											<th style="width: 10%; text-align: center;">วันที่</th>
+											<th style="width: 8%; text-align: center;">เวลา</th>
+											<th style="text-align: center;">หมายเหตุ</th>
+											<th style="width: 15%; text-align: center;">ผู้รับ</th>
+											<th style="width: 10%; text-align: center;">ยอดชำระ</th>
+											<th style="width: 10%; text-align: center;">ยอดคงเหลือ</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -234,12 +235,13 @@
 											<td style="text-align: center;">{{ row.bill_no }}</td>
 											<td style="text-align: center;">{{ row.paid_date | thdate }}</td>
 											<td style="text-align: center;">{{ row.paid_time }}</td>
+											<td style="text-align: center;">{{ row.remark }}</td>
 											<td>{{ row.cashier }}</td>
 											<td style="text-align: right;">{{ row.paid_amount | currency:'':2  }}</td>
 											<td style="text-align: right;">{{ row.remain | currency:'':2  }}</td>
 										</tr>
 										<tr>
-											<td style="text-align: right;" colspan="5">รวมชำระแล้วทั้งสิ้น</td>
+											<td style="text-align: right;" colspan="6">รวมชำระแล้วทั้งสิ้น</td>
 											<td style="text-align: right;">{{ totalData.totalPaid | currency:'':2 }}</td>
 											<td style="text-align: right;"></td>
 										</tr>

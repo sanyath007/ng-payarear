@@ -93,7 +93,6 @@ app.controller('arrearController', [
 
 			$http.get(url)
 			.then(res => {
-				console.log(res);
 				$scope.payment.visit = res.data.visit;
 				$scope.payment.paid = res.data.paid;
 				$scope.payment.notes = res.data.notes;
@@ -123,6 +122,8 @@ app.controller('arrearController', [
 			let billNo = $('#txtBillNo').val();
 			let remark = $('#txtRemark').val();
 
+			// TODO: validate input value before store data
+
 			let newArrear = {
 				vn: $scope.isOpCase ? $scope.payment.visit.vn : '',
 				an: $scope.isOpCase ? '' : $scope.payment.visit.an,
@@ -137,18 +138,19 @@ app.controller('arrearController', [
 				remark: remark
 			};
 
-			$http.post(`${CONFIG.apiUrl}/arrears-payment/${$scope.payment.visit.vn}/${$scope.payment.visit.hn}`, newArrear)
-			.then(res => {
-				console.log(res);
-				window.location.reload();
-				// TODO: update paid list with new paid
+			console.log(newArrear);
+			// $http.post(`${CONFIG.apiUrl}/arrears-payment/${$scope.payment.visit.vn}/${$scope.payment.visit.hn}`, newArrear)
+			// .then(res => {
+			// 	console.log(res);
+			// 	window.location.reload();
+			// 	// TODO: update paid list with new paid
 
-				// TODO: display message popup for successful process
-			}, err => {
-				console.log(err);
+			// 	// TODO: display message popup for successful process
+			// }, err => {
+			// 	console.log(err);
 
-				// TODO: display message popup for failure process
-			});
+			// 	// TODO: display message popup for failure process
+			// });
 		};
 
 		const calcAge = (birthdate, type) => {

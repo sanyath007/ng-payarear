@@ -79,7 +79,7 @@ var app = angular.module('App', ['ngRoute', 'ngStorage', 'toaster', 'angular-loa
         '$http',
         'CONFIG',
         '$localStorage',
-        function ($rootScope, $window, $http, CONFIG, $localStorage) 
+        function ($rootScope, $window, $http, CONFIG, $location, $localStorage) 
         {
             // keep user logged in after page refresh
             if ($localStorage.currentUser) {
