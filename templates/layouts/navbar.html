@@ -108,14 +108,14 @@
         <li class="nav-item dropdown user-menu" ng-show="isLogedIn">
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                 <img src="assets/img/user2-160x160.jpg" class="user-image img-circle elevation-2" alt="User Image">
-                <span class="d-none d-md-inline">Sanya Thammawong</span>
+                <span class="d-none d-md-inline">{{ loggedInUser }}</span>
             </a>
             <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                 <li class="user-header bg-primary">
                     <img src="assets/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
 
                     <p>
-                        Sanya Thammawong<br>
+                        {{ loggedInUser }}<br>
                         Web Developer
                         <small>Member since Nov. 2012</small>
                     </p>

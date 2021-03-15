@@ -82,9 +82,15 @@ var app = angular.module('App', ['ngRoute', 'ngStorage', 'toaster', 'angular-loa
         '$localStorage',
         function ($rootScope, $window, $http, CONFIG, $location, $localStorage) 
         {
+            $rootScope.isLogedIn = false;
+            $rootScope.loggedInUser = '';
+
             // keep user logged in after page refresh
             if ($localStorage.currentUser) {
                 $rootScope.isLogedIn = true;
+
+                $rootScope.loggedInUser = $localStorage.currentUser.username;
+                
                 // add jwt token to auth header for all requests made by the $http service
                 $http.defaults.headers.common.Authorization = `Bearer ${$localStorage.currentUser.token}`;
             } else {
@@ -103,6 +109,8 @@ var app = angular.module('App', ['ngRoute', 'ngStorage', 'toaster', 'angular-loa
                 $http.defaults.headers.common.Authorization = '';
                 
                 $rootScope.isLogedIn = false;
+                
+                $rootScope.loggedInUser = '';
             };
 
             $rootScope.redirectToIndex = function(route) {
