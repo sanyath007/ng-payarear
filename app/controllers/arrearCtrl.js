@@ -5,12 +5,14 @@ app.controller('arrearController', [
 	'CONFIG',
 	'$routeParams',
 	'StringFormatService',
-	function($rootScope, $scope, $http, CONFIG, $routeParams, StringFormatService) 
+	'toaster',
+	function($rootScope, $scope, $http, CONFIG, $routeParams, StringFormatService, toaster) 
 	{
 		$scope.sdate = '';
 		$scope.edate = '';
 		$scope.data = [];
 		$scope.pager = null;
+		$scope.errors = null;
 
 		$scope.isOpCase = false;
 		$scope.totalData = {};
@@ -139,18 +141,28 @@ app.controller('arrearController', [
 				remark: remark
 			};
 
-			console.log(newArrear);
-			$http.post(`${CONFIG.apiUrl}/arrears-payment/${$scope.payment.visit.vn}/${$scope.payment.visit.hn}`, newArrear)
+			let url = $scope.isOpCase 
+						? `${CONFIG.apiUrl}/arrears-payment/${$scope.payment.visit.vn}/${$scope.payment.visit.hn}`
+						: `${CONFIG.apiUrl}/arrears-payment/${$scope.payment.visit.an}/${$scope.payment.visit.hn}`;
+
+			$http.post(url, newArrear)
 			.then(res => {
 				console.log(res);
-				window.location.reload();
-				// TODO: update paid list with new paid
 
-				// TODO: display message popup for successful process
+				if (res.data.status === 1) {
+					toaster.pop('success', "", 'บันทึกข้อมูลสำเร็จ !!!');
+
+					// TODO: update paid list with new paid
+					window.location.reload();
+				} else {10
+					$scope.errors = res.data.errors;
+
+					toaster.pop('warning', "", 'คุณกรอกข้อมูลไม่ครบ !!!');
+				}
 			}, err => {
 				console.log(err);
 
-				// TODO: display message popup for failure process
+				toaster.pop('error', "", 'เกิดข้อผิดพลาด ไม่สามารถบันทึกข้อมูลได้ !!!');
 			});
 		};
 

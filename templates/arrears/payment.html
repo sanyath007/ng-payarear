@@ -148,6 +148,7 @@
 													name="txtBillNo"
 													class="form-control"
 													placeholder="เลขที่ใบเสร็จ"
+													ng-class="{'is-invalid': errors.bill_no}"
 													ng-disabled="payment.visit.remain === 0"
 												>
 											</div>
@@ -159,6 +160,7 @@
 													name="txtPaidDate"
 													class="form-control"
 													autocomplete="off"
+													ng-class="{'is-invalid': errors.paid_date}"
 													ng-disabled="payment.visit.remain === 0"
 												>
 											</div>
@@ -170,6 +172,7 @@
 													name="txtPaidTime"
 													class="form-control"
 													autocomplete="off"
+													ng-class="{'is-invalid': errors.paid_time}"
 													ng-disabled="payment.visit.remain === 0"
 												>
 											</div>
@@ -183,6 +186,7 @@
 													name="txtRemark"
 													class="form-control"
 													placeholder="หมายเหตุ"
+													ng-class="{'is-invalid': errors.remark}"
 													ng-disabled="payment.visit.remain === 0"
 												>
 											</div>
@@ -195,6 +199,7 @@
 													name="txtPaidAmount"
 													class="form-control form-control-md"
 													placeholder="ยอดชำระ"
+													ng-class="{'is-invalid': errors.paid_amount}"
 													ng-disabled="payment.visit.remain === 0"
 												>
 												<div class="input-group-append">

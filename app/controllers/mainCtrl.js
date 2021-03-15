@@ -44,6 +44,7 @@ app.controller('mainController', [
                 $rootScope.isLogedIn = true;
 
                 toaster.pop('success', "", 'เข้าสู่ระบบสำเร็จ !!!');
+
                 // hide login form modal
                 $('#loginForm').modal('hide');
             }, err => {
