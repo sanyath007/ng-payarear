@@ -1,10 +1,11 @@
 app.controller('arrearController', [
+	'$rootScope',
 	'$scope',
 	'$http',
 	'CONFIG',
 	'$routeParams',
 	'StringFormatService',
-	function($scope, $http, CONFIG, $routeParams, StringFormatService) 
+	function($rootScope, $scope, $http, CONFIG, $routeParams, StringFormatService) 
 	{
 		$scope.sdate = '';
 		$scope.edate = '';
@@ -134,23 +135,23 @@ app.controller('arrearController', [
 				paid_time: `${paidTime}:00`,
 				paid_amount: paidAmount,
 				remain: parseFloat($scope.payment.visit.remain) - parseFloat(paidAmount),
-				cashier: 'test', // TODO: get logged in user
+				cashier: $rootScope.loggedInUser,
 				remark: remark
 			};
 
 			console.log(newArrear);
-			// $http.post(`${CONFIG.apiUrl}/arrears-payment/${$scope.payment.visit.vn}/${$scope.payment.visit.hn}`, newArrear)
-			// .then(res => {
-			// 	console.log(res);
-			// 	window.location.reload();
-			// 	// TODO: update paid list with new paid
+			$http.post(`${CONFIG.apiUrl}/arrears-payment/${$scope.payment.visit.vn}/${$scope.payment.visit.hn}`, newArrear)
+			.then(res => {
+				console.log(res);
+				window.location.reload();
+				// TODO: update paid list with new paid
 
-			// 	// TODO: display message popup for successful process
-			// }, err => {
-			// 	console.log(err);
+				// TODO: display message popup for successful process
+			}, err => {
+				console.log(err);
 
-			// 	// TODO: display message popup for failure process
-			// });
+				// TODO: display message popup for failure process
+			});
 		};
 
 		const calcAge = (birthdate, type) => {
