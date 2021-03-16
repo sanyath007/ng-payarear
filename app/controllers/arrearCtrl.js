@@ -20,7 +20,9 @@ app.controller('arrearController', [
 
 		const initTotalArrear = function() {
 			return {
-				totalArrear: 0
+				totalToPay: 0,
+				totalPaid: 0,
+				totalArrear: 0,
 			}
 		};
 		
@@ -29,25 +31,43 @@ app.controller('arrearController', [
 				totalPaid: 0
 			}
 		};
+		
+		const getDateRange = () => {
+			return {
+				startDate: ($scope.sdate !== '') 
+							? StringFormatService.convToDbDate($scope.sdate) 
+							: moment().startOf('month').format('YYYY-MM-DD'),
+				endDate: ($scope.edate !== '')
+							? StringFormatService.convToDbDate($scope.edate) 
+							: moment().format('YYYY-MM-DD'),
+			};
+		};
 
 		$scope.getOpArrears = function(e) {
 			if(e) e.preventDefault();
 
 			$scope.totalData = initTotalArrear();
 
-			let startDate = ($scope.sdate !== '') 
-							? StringFormatService.convToDbDate($scope.sdate) 
-							: moment().format('YYYY-MM-DD');
-			let endDate = ($scope.edate !== '') 
-							? StringFormatService.convToDbDate($scope.edate) 
-							: moment().format('YYYY-MM-DD');
+			let { startDate, endDate } = getDateRange();
 
 			$http.get(`${CONFIG.apiUrl}/arrears-op/${startDate}/${endDate}`)
 			.then(res => {
 				$scope.data = res.data.ops;
 
-				// Summary total arrear of op
-				$scope.totalData.totalArrear = calcArrearTotal($scope.data);
+				$scope.data.forEach(async (ip) => {
+					let res = await $http.get(`${CONFIG.apiUrl}/arrears-paid/op/${ip.vn}/${ip.hn}`);
+					let totalPaid = res.data ? parseFloat(res.data.total_paid) : 0;
+
+					ip.rcpt_money = parseFloat(ip.rcpt_money) + totalPaid;
+					ip.remain = parseFloat(ip.paid_money) - ip.rcpt_money;
+					
+					// Summary total paid and remain
+					$scope.totalData.totalPaid += ip.rcpt_money;
+					$scope.totalData.totalArrear += ip.remain;
+				});
+				
+				// Summary total to pay
+				$scope.totalData.totalToPay = calcArrearTotal($scope.data);
 			}, err => {
 				console.log(err)
 			});
@@ -58,19 +78,27 @@ app.controller('arrearController', [
 
 			$scope.totalData = initTotalArrear();
 			
-			let startDate = ($scope.sdate !== '') 
-							? StringFormatService.convToDbDate($scope.sdate) 
-							: moment().startOf('month').format('YYYY-MM-DD');
-			let endDate = ($scope.edate !== '')
-							? StringFormatService.convToDbDate($scope.edate) 
-							: moment().format('YYYY-MM-DD');
+			let { startDate, endDate } = getDateRange();
 
 			$http.get(`${CONFIG.apiUrl}/arrears-ip/${startDate}/${endDate}`)
 			.then(res => {
+				console.log(res.data);
 				$scope.data = res.data.ips;
 
-				// Summary total arrear of ip
-				$scope.totalData.totalArrear = calcArrearTotal($scope.data);
+				$scope.data.forEach(async (ip) => {
+					let res = await $http.get(`${CONFIG.apiUrl}/arrears-paid/ip/${ip.an}/${ip.hn}`);
+					let totalPaid = res.data ? parseFloat(res.data.total_paid) : 0;
+
+					ip.rcpt_money = parseFloat(ip.rcpt_money) + totalPaid;
+					ip.remain = parseFloat(ip.paid_money) - ip.rcpt_money;
+					
+					// Summary total paid and remain
+					$scope.totalData.totalPaid += ip.rcpt_money;
+					$scope.totalData.totalArrear += ip.remain;
+				});
+				
+				// Summary total to pau
+				$scope.totalData.totalToPay = calcArrearTotal($scope.data);
 			}, err => {
 				console.log(err)
 			});
@@ -83,18 +111,13 @@ app.controller('arrearController', [
 
 			$scope.totalData = initTotalPaid();
 
-			let url = '';			
 			if (type === 'op') {
-				url = `${CONFIG.apiUrl}/arrears-payment/${type}/${an}/${hn}`;
-
 				$scope.isOpCase = true;
-			} else {
-				url = `${CONFIG.apiUrl}/arrears-payment/${type}/${an}/${hn}`;
-				
+			} else {				
 				$scope.isOpCase = false;
 			}
 
-			$http.get(url)
+			$http.get(`${CONFIG.apiUrl}/arrears-payment/${type}/${an}/${hn}`)
 			.then(res => {
 				$scope.payment.visit = res.data.visit;
 				$scope.payment.paid = res.data.paid;

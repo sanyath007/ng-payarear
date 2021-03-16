@@ -63,9 +63,11 @@
 									<th style="width: 5%; text-align: center;">วันที่ D/C</th>
 									<th style="width: 15%; text-align: center;">สิทธิ์</th>
 									<th style="width: 12%; text-align: center;">วอร์ด</th>
-									<th style="width: 6%; text-align: center;">ชำระเงิน</th>
-									<th style="width: 6%; text-align: center;">ลูกหนี้</th>
 									<th style="width: 6%; text-align: center;">ยอดรวม</th>
+									<th style="width: 6%; text-align: center;">ลูกหนี้</th>
+									<th style="width: 6%; text-align: center;">ชำระเงิน</th>
+									<th style="width: 6%; text-align: center;">ชำระแล้ว</th>
+									<th style="width: 6%; text-align: center;">ค้างชำระ</th>
 									<th style="width: 6%; text-align: center;">Actions</th>
 								</tr>
 							</thead>
@@ -79,20 +81,32 @@
 									<td style="text-align: center;">{{ row.dchdate | thdate }}</td>
 									<td style="text-align: center;">{{ row.pttname }}</td>
 									<td style="text-align: center;">{{ row.ward }}</td>
-									<td style="text-align: center;">{{ row.paid_money | currency:'':2 }}</td>
-									<td style="text-align: center;">{{ row.uc_money | currency:'':2 }}</td>
 									<td style="text-align: center;">{{ row.income | currency:'':2 }}</td>
+									<td style="text-align: center;">{{ row.uc_money | currency:'':2 }}</td>
+									<td style="text-align: center;">{{ row.paid_money | currency:'':2 }}</td>
+									<td style="text-align: center; color: green;">
+										{{ row.rcpt_money | currency:'':2 }}
+									</td>
+									<td style="text-align: center; color: red;">
+										{{ row.remain | currency:'':2 }}
+									</td>
 									<td style="text-align: center;">
 										<a href="arrears/payment/ip/{{ row.an }}/{{ row.hn }}" class="btn btn-danger btn-sm">
 											ชำระเงิน
 										</a>
 									</td>
 								</tr>
-								<tr>
-									<td style="text-align: center;" colspan="8">รวม</td>
-									<td style="text-align: center;">{{ totalData.totalArrear | currency:'':2 }}</td>
-									<td style="text-align: center;">{{ totalData.generations.x }}</td>
-									<td style="text-align: center;">{{ totalData.generations.y }}</td>
+								<tr style="font-weight: 700;">
+									<td style="text-align: center;" colspan="10">รวม</td>
+									<td style="text-align: center;">
+										{{ totalData.totalToPay | currency:'':2 }}
+									</td>
+									<td style="text-align: center; color: green;">
+										{{ totalData.totalPaid | currency:'':2 }}
+									</td>
+									<td style="text-align: center; color: red;">
+										{{ totalData.totalArrear | currency:'':2 }}
+									</td>
 									<td style="text-align: center;"></td>
 								</tr>
 							</tbody>
