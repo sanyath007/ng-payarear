@@ -18,14 +18,6 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
 		templateUrl: 'templates/user/list.html',
 		controller: 'userController'
 	})
-	.when('/dash-day', {
-		templateUrl: 'templates/dashboard/dash-day.html',
-		controller: 'dashdayController'
-	})
-	.when('/dash-month', {
-		templateUrl: 'templates/dashboard/dash-month.html',
-		controller: 'dashmonthController'
-	})
 	.when('/arrears/op-list', {
 		templateUrl: 'templates/arrears/op-list.html',
 		controller: 'arrearController'
@@ -38,18 +30,18 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
 		templateUrl: 'templates/arrears/payment.html',
 		controller: 'arrearController'
 	})
-	.when('/pharma/ip', {
-		templateUrl: 'templates/pharma/ip.html',
-		controller: 'pharmaController'
-	})
-	.when('/pharma/new-druglists', {
-		templateUrl: 'templates/pharma/drug-list-form.html',
-		controller: 'pharmaController'
-	})
-	.when('/pharma/user-druglists', {
-		templateUrl: 'templates/pharma/user-drug-list.html',
-		controller: 'pharmaController'
-	})
+	// .when('/pharma/ip', {
+	// 	templateUrl: 'templates/pharma/ip.html',
+	// 	controller: 'pharmaController'
+	// })
+	// .when('/pharma/new-druglists', {
+	// 	templateUrl: 'templates/pharma/drug-list-form.html',
+	// 	controller: 'pharmaController'
+	// })
+	// .when('/pharma/user-druglists', {
+	// 	templateUrl: 'templates/pharma/user-drug-list.html',
+	// 	controller: 'pharmaController'
+	// })
 	.otherwise({
 		redirectTo: '/'
 	});

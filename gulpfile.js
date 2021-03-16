@@ -25,7 +25,7 @@ gulp.task('css', function() {
     ])
     .pipe(minifyCss())
     .pipe(concat('bundle.css'))
-    .pipe(gulp.dest('dist/assets/css'))
+    .pipe(gulp.dest('payarrear/assets/css'))
     .pipe(notify({ message: "CSS files successfully concated and reduced" }));
 });
 
@@ -33,7 +33,7 @@ gulp.task('webfonts', function() {
     return gulp.src([
         'node_modules/admin-lte/plugins/fontawesome-free/webfonts/*',
     ])
-    .pipe(gulp.dest('dist/assets/webfonts'))
+    .pipe(gulp.dest('payarrear/assets/webfonts'))
     .pipe(notify({ message: "Copy webfont for css files successfully" }));
 });
 
@@ -57,7 +57,7 @@ gulp.task('venderjs', function() {
     ])
     .pipe(uglify())
     .pipe(concat('vendor-bundle.js'))
-    .pipe(gulp.dest('dist/assets/js'))
+    .pipe(gulp.dest('payarrear/assets/js'))
     .pipe(notify({ message: "Vendor JS files successfully concated and reduced" }));
 });
 
@@ -72,7 +72,7 @@ gulp.task('appjs', function() {
     ])
     .pipe(uglify())
     .pipe(concat('bundle.js'))
-    .pipe(gulp.dest('dist/assets/js'))
+    .pipe(gulp.dest('payarrear/assets/js'))
     .pipe(notify({ message: "App JS files successfully concated and reduced" }));
 });
 
@@ -80,14 +80,14 @@ gulp.task('images', function() {
     return gulp.src([
         'assets/img/**/*'
     ])
-    .pipe(gulp.dest('dist/assets/img'))
+    .pipe(gulp.dest('payarrear/assets/img'))
     .pipe(notify({ message: "Copy image files successfully" }));
 });
 
 gulp.task('templates', function () {
     return gulp.src('templates/**/*')
-        .pipe(gulp.dest('dist/templates'))
+        .pipe(gulp.dest('payarrear/templates'))
         .pipe(notify({ message: "Copy template files successfully" }));
 });
 
-gulp.task('default', gulp.series('appjs', 'templates')); //'css', 'webfonts', 'venderjs', 'images', 'appjs', 'templates'
+gulp.task('default', gulp.series('css', 'webfonts', 'venderjs', 'images', 'appjs', 'templates')); //'css', 'webfonts', 'venderjs', 'images', 'appjs', 'templates'
