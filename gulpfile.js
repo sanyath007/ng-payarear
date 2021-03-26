@@ -21,6 +21,7 @@ gulp.task('css', function() {
         'node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css',
         'node_modules/angularjs-toaster/toaster.css',
         'node_modules/angular-loading-bar/build/loading-bar.min.css',
+        'node_modules/jquery-timepicker/jquery.timepicker.css',
         'assets/css/**/*.css',
     ])
     .pipe(minifyCss())
@@ -54,6 +55,7 @@ gulp.task('venderjs', function() {
         'node_modules/ngstorage/ngstorage.min.js',
         'node_modules/select2/dist/js/select2.full.min.js',
         'node_modules/angular-loading-bar/build/loading-bar.min.js',
+        'node_modules/jquery-timepicker/jquery.timepicker.js',
     ])
     .pipe(uglify())
     .pipe(concat('vendor-bundle.js'))
@@ -90,4 +92,4 @@ gulp.task('templates', function () {
         .pipe(notify({ message: "Copy template files successfully" }));
 });
 
-gulp.task('default', gulp.series('css', 'webfonts', 'venderjs', 'images', 'appjs', 'templates')); //'css', 'webfonts', 'venderjs', 'images', 'appjs', 'templates'
+gulp.task('default', gulp.series('css', 'venderjs', 'images', 'appjs', 'templates')); //'css', 'webfonts', 'venderjs', 'images', 'appjs', 'templates'

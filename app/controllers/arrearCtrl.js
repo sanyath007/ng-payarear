@@ -177,7 +177,7 @@ app.controller('arrearController', [
 
 					// refresh page to update data
 					window.location.reload();
-				} else {10
+				} else {
 					$scope.errors = res.data.errors;
 
 					toaster.pop('warning', "", 'คุณกรอกข้อมูลไม่ครบ !!!');
