@@ -10,6 +10,7 @@ app.controller('arrearController', [
 	{
 		$scope.sdate = '';
 		$scope.edate = '';
+
 		$scope.data = [];
 		$scope.pager = null;
 		$scope.errors = null;
@@ -32,14 +33,21 @@ app.controller('arrearController', [
 			}
 		};
 		
-		const getDateRange = () => {
+		const getDateRange = (startOfToSDate = false, endofToEDate = false) => {
+			let startDate = startOfToSDate
+								? moment().startOf('month').format('YYYY-MM-DD')
+								: moment().format('YYYY-MM-DD');
+			let endDate = endofToEDate
+								? moment().endOf('month').format('YYYY-MM-DD')
+								: moment().format('YYYY-MM-DD');
+
 			return {
 				startDate: ($scope.sdate !== '') 
 							? StringFormatService.convToDbDate($scope.sdate) 
-							: moment().startOf('month').format('YYYY-MM-DD'),
+							: startDate,
 				endDate: ($scope.edate !== '')
 							? StringFormatService.convToDbDate($scope.edate) 
-							: moment().format('YYYY-MM-DD'),
+							: endDate,
 			};
 		};
 
@@ -78,11 +86,10 @@ app.controller('arrearController', [
 
 			$scope.totalData = initTotalArrear();
 			
-			let { startDate, endDate } = getDateRange();
+			let { startDate, endDate } = getDateRange(true);
 
 			$http.get(`${CONFIG.apiUrl}/arrears-ip/${startDate}/${endDate}`)
 			.then(res => {
-				console.log(res.data);
 				$scope.data = res.data.ips;
 
 				$scope.data.forEach(async (ip) => {
