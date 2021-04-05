@@ -92,4 +92,4 @@ gulp.task('templates', function () {
         .pipe(notify({ message: "Copy template files successfully" }));
 });
 
-gulp.task('default', gulp.series('css', 'venderjs', 'images', 'appjs', 'templates')); //'css', 'webfonts', 'venderjs', 'images', 'appjs', 'templates'
+gulp.task('default', gulp.series('appjs', 'templates')); //'css', 'webfonts', 'venderjs', 'images', 'appjs', 'templates'
