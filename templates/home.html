@@ -4,13 +4,7 @@
 	ng-init="getOpVisit($event);
 			getOpVisitType($event);
 			getIpVisit($event);
-			getIpClass($event);
-			getReferIn($event);
-			getReferOut($event);
-			getErVisit($event);
-			getErEmergency($event);
-			getOrVisit($event);
-			getOrType($event);"
+			getIpClass($event);"
 >
 	<div class="container-fluid">
 		
@@ -34,13 +28,7 @@
 					<button class="btn btn-primary" ng-click="getOpVisit($event);
 															getOpVisitType($event);
 															getIpVisit($event);
-															getIpClass($event);
-															getReferIn($event);
-															getReferOut($event);
-															getErVisit($event);
-															getErEmergency($event);
-															getOrVisit($event);
-															getOrType($event);"
+															getIpClass($event);"
 					>ตกลง</button>
 				</form>
 
@@ -101,80 +89,6 @@
 							</div>
 						</div>
 
-					</div>
-				</div>
-
-
-				<div class="card">
-					<div class="card-header">
-						<h3 class="card-title">
-							<i class="fas fa-ambulance mr-1"></i>
-							Refer In/Out ปีงบประมาณ {{ cboYear }}
-						</h3>
-					</div><!-- /.card-header -->
-					<div class="card-body">
-						<div class="row">
-							<div class="col-md-6">
-
-								<div id="referInBarContainer" style="width: 100%; height: 400px; margin: 20px auto;"></div>
-
-							</div>
-
-							<div class="col-md-6">
-
-								<div id="referOutBarContainer" style="width: 100%; height: 400px; margin: 20px auto;"></div>
-
-							</div>
-						</div>
-					</div>
-				</div>
-		
-				<div class="card">
-					<div class="card-header">
-						<h3 class="card-title">
-							<i class="fas fa-wheelchair mr-1"></i>
-							ห้องอุบัติเหตุและฉุกเฉิน (ER) ปีงบประมาณ {{ cboYear }}
-						</h3>
-					</div><!-- /.card-header -->
-					<div class="card-body">
-						<div class="row">
-							<div class="col-md-6">
-
-								<div id="erVisitBarContainer" style="width: 100%; height: 400px; margin: 20px auto;"></div>
-
-							</div>
-
-							<div class="col-md-6">
-
-								<div id="erEmergencyPieContainer" style="width: 100%; height: 400px; margin: 20px auto;"></div>
-
-							</div>
-						</div>
-
-					</div>
-				</div>
-
-				<div class="card">
-					<div class="card-header">
-						<h3 class="card-title">
-							<i class="fas fa-user-nurse mr-1"></i>
-							ห้องผ่าตัด (OR) ปีงบประมาณ {{ cboYear }}
-						</h3>
-					</div><!-- /.card-header -->
-					<div class="card-body">
-						<div class="row">
-							<div class="col-md-6">
-
-								<div id="orTypePieContainer" style="width: 100%; height: 400px; margin: 20px auto;"></div>
-
-							</div>
-
-							<div class="col-md-6">
-
-								<div id="orVisitBarContainer" style="width: 100%; height: 400px; margin: 20px auto;"></div>
-
-							</div>
-						</div>
 					</div>
 				</div>
 		
